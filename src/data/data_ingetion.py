@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
+import  yaml
 import os
 import logging
 from sklearn.model_selection import train_test_split
 
-# -----------start--------
+# -----------start---------
 
 logger=logging.getLogger("data_ingesion")
 logger.setLevel(logging.DEBUG)
@@ -15,6 +16,18 @@ console_handler.setLevel(logging.DEBUG)
 console_handler.setFormatter(formatter)
 # add handler
 logger.addHandler(console_handler)
+def params_yamlload(path:str)->None:
+    try:
+        with open(path,"r") as file:
+           params= yaml.safe_load(file)
+           return params
+        logger.info("file retrirved succesfully")
+    except FileNotFoundError as e:
+        logger.error("file not found %s",e)
+        raise
+    except Exception as e:
+        logger.error("anu unusual error happened")
+
 # loading dataset
 def data_load(file_path:str)-> pd.DataFrame:
     try:
@@ -52,9 +65,10 @@ def save_df(train_data:pd.DataFrame,test_data:pd.DataFrame,data_path:str)->None:
         logger.error("any unexpected error accurred %s",e)
         raise   
 def main():
+    params=params_yamlload("params.yaml")
     df=data_load("data/raw/spam.csv")
     df=removed_irrelavent_clm(df)
-    train_data,test_data=train_test_split(df,test_size=0.2,random_state=42)
+    train_data,test_data=train_test_split(df,test_size=params["data_ingetion"]["test_size"],random_state=params["data_ingetion"]["random_state"])
     save_df(train_data,test_data,"data")
 logger.debug("df save completed")    
 

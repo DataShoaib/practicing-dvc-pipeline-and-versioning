@@ -9,28 +9,28 @@ stages:
       size: 503663
     - path: src/data/data_ingetion.py
       hash: md5
-      md5: 8355e68ac79e0d926187f4d87c637c92
-      size: 2210
+      md5: 37facde36fceb9a97e12dd348a55f8da
+      size: 2720
     outs:
     - path: data/raw/test_data.csv
       hash: md5
-      md5: 6e635acfe8d24c30c46ea18c568960eb
-      size: 98560
+      md5: 382dff7aff16e48e031e525c0ef4dfa7
+      size: 147265
     - path: data/raw/train_data.csv
       hash: md5
-      md5: 2e9e712c23220e3d7d9c618edd4be470
-      size: 386286
+      md5: a0b4cff8a3a8d5f62e461344c0b62749
+      size: 337581
   feature_engineering:
     cmd: python src/features/feature_engineering.py
     deps:
     - path: data/raw/test_data.csv
       hash: md5
-      md5: 6e635acfe8d24c30c46ea18c568960eb
-      size: 98560
+      md5: 382dff7aff16e48e031e525c0ef4dfa7
+      size: 147265
     - path: data/raw/train_data.csv
       hash: md5
-      md5: 2e9e712c23220e3d7d9c618edd4be470
-      size: 386286
+      md5: a0b4cff8a3a8d5f62e461344c0b62749
+      size: 337581
     - path: src/features/feature_engineering.py
       hash: md5
       md5: c939f75981214ca66cd07949ddc21b83
@@ -38,23 +38,23 @@ stages:
     outs:
     - path: data/processed/test_processed.csv
       hash: md5
-      md5: d35a8cf0f02a5fb67bb189696127061c
-      size: 62413
+      md5: b162e3f0fceb3c1056d40f0a67b845d9
+      size: 93414
     - path: data/processed/train_processed.csv
       hash: md5
-      md5: 8a158f1b2ff676d0a160e03d41b00d97
-      size: 246689
+      md5: d9bd2e2833f0aa71e01a88dcedd9c5d6
+      size: 215688
   feature_extraction:
     cmd: python src/features/feature_extraction.py
     deps:
     - path: data/processed/test_processed.csv
       hash: md5
-      md5: d35a8cf0f02a5fb67bb189696127061c
-      size: 62413
+      md5: b162e3f0fceb3c1056d40f0a67b845d9
+      size: 93414
     - path: data/processed/train_processed.csv
       hash: md5
-      md5: 8a158f1b2ff676d0a160e03d41b00d97
-      size: 246689
+      md5: d9bd2e2833f0aa71e01a88dcedd9c5d6
+      size: 215688
     - path: src/features/feature_extraction.py
       hash: md5
       md5: e3a0f19c9745b91124ef4e59b878efdc
@@ -62,9 +62,9 @@ stages:
     outs:
     - path: data/processed/test_tfidf.csv
       hash: md5
-      md5: 562bf8b83cc4049c48e88723e87aea41
-      size: 9046234
+      md5: 73f7ddafd8a4cf54e06ca17fbeb44ad0
+      size: 10204071
     - path: data/processed/train_tfidf.csv
       hash: md5
-      md5: fa0b77d87b81a89e90233d3eaf941e81
-      size: 36144265
+      md5: 3a51ae3e2d16b952a24927f106c4d6a6
+      size: 23805245
