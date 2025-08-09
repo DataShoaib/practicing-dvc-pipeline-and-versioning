@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  data_ingetion:
+    cmd: python src/data/data_ingetion.py
+    deps:
+    - path: data/raw/spam.csv
+      hash: md5
+      md5: 008dcf9ca6aab621d3b3831db6815867
+      size: 503663
+    - path: src/data/data_ingetion.py
+      hash: md5
+      md5: 8355e68ac79e0d926187f4d87c637c92
+      size: 2210
+    outs:
+    - path: data/raw/test_data.csv
+      hash: md5
+      md5: 6e635acfe8d24c30c46ea18c568960eb
+      size: 98560
+    - path: data/raw/train_data.csv
+      hash: md5
+      md5: 2e9e712c23220e3d7d9c618edd4be470
+      size: 386286
+  feature_engineering:
+    cmd: python src/features/feature_engineering.py
+    deps:
+    - path: data/raw/test_data.csv
+      hash: md5
+      md5: 6e635acfe8d24c30c46ea18c568960eb
+      size: 98560
+    - path: data/raw/train_data.csv
+      hash: md5
+      md5: 2e9e712c23220e3d7d9c618edd4be470
+      size: 386286
+    - path: src/features/feature_engineering.py
+      hash: md5
+      md5: c939f75981214ca66cd07949ddc21b83
+      size: 1796
+    outs:
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: d35a8cf0f02a5fb67bb189696127061c
+      size: 62413
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 8a158f1b2ff676d0a160e03d41b00d97
+      size: 246689
+  feature_extraction:
+    cmd: python src/features/feature_extraction.py
+    deps:
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: d35a8cf0f02a5fb67bb189696127061c
+      size: 62413
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 8a158f1b2ff676d0a160e03d41b00d97
+      size: 246689
+    - path: src/features/feature_extraction.py
+      hash: md5
+      md5: e3a0f19c9745b91124ef4e59b878efdc
+      size: 1775
+    outs:
+    - path: data/processed/test_tfidf.csv
+      hash: md5
+      md5: 562bf8b83cc4049c48e88723e87aea41
+      size: 9046234
+    - path: data/processed/train_tfidf.csv
+      hash: md5
+      md5: fa0b77d87b81a89e90233d3eaf941e81
+      size: 36144265
